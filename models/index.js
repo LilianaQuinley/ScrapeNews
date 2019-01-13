@@ -95,6 +95,5 @@ function createPanel (article) {
   //Appending this data to the page
   articleContainer.append(emptyAlert);
   }
-
   
 })
