@@ -4,14 +4,9 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-
-
-
 // Require all models
-//const db = require("./models");
+//const db = require("../models");
   
-
-
 const PORT = process.env.PORT || 3000;
 
 // Initialize Express
@@ -45,31 +40,32 @@ app.use(bodyParser.urlencoded ({
   extended: false
 }));
 
-// Connect to the Mongo DB
-// mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
+//Connect to the Mongo DB
+mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
 
 // Routes
 // have every request to go through our router middleware
 app.use(router);
 
 // If developed, use the deployed database. Otherwise use the local mongoHeadlines database
-// var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadLines";
+//var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadLines";
 
-//   //connect mongoose to our database
-//   mongoose.connect(db, function (error){
-//     if (error) {
-//       console.log(error);
-//     }
-//     else {
-//       console.log("mongoose connection is sucessful");
-//     }
-
-//   });
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 mongoose.connect(MONGODB_URI);
+
+  //connect mongoose to our database
+  // mongoose.connect(db, function (error){
+  //   if (error) {
+  //     console.log(error);
+  //   }
+  //   else {
+  //     console.log("mongoose connection is sucessful");
+  //   }
+
+  // });
 
 
 // Start the server
