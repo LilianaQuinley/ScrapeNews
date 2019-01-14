@@ -41,7 +41,7 @@ app.use(bodyParser.urlencoded ({
 }));
 
 //Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
+//mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
 
 // Routes
 // have every request to go through our router middleware

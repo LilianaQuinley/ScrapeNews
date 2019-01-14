@@ -18,10 +18,14 @@ module.exports = function (router) {
     router.get("/scrape", function (req, res){
       
         console.log("I got scrape")
-        scrape(res, function(results) {
-            console.log(results)
-            res.send( JSON.stringify(results) )
+        headlinesController.fetch(function(err, docs) {
+            console.log("Done with scraping.")
+            res.send( JSON.stringify(docs) )
         });
+        // scrape(function(results) {
+        //     console.log(results)
+        //     res.send( JSON.stringify(results) )
+        // });
     });
 
     router.get("/api/fetch", function (req, res){
@@ -58,6 +62,8 @@ module.exports = function (router) {
     });
 
     router.patch ("/api/article", function (req, res){
+        console.log("Patching with data:");
+        console.log(req.body)
         headlinesController.update(req.body, function (err, data){
             res.json(data);
         });

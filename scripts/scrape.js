@@ -9,16 +9,18 @@ const app = express();
 // Require all models
 const db = require("../models/article");
 
-function scrape (res, cb){
+function scrape (cb){
+  console.log("Type of cb " + (typeof cb))
 
   axios.get("https://www.reuters.com/").then(function(response) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector
       let $ = cheerio.load(response.data);
-      //console.log(response);
+      console.log(response);
   
       // Now, we grab every top Story within an article tag, and do the following:
       var results = []
       $(".story-title").each(function(i, element) {
+        console.log("Story title exists.")
         // Save an empty result object
         let result = {};
   
@@ -29,8 +31,10 @@ function scrape (res, cb){
           .trim();
         result.link = $(this)
           .children("a")
-          .attr("href")
-          .trim();
+          .attr("href");
+
+          console.log("Reszult is " );
+          console.log(result)
 
           if (result.link != undefined) {
             results.push(result);

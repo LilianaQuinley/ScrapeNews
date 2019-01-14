@@ -6,14 +6,19 @@ var article = require ("../models/article");
 
 module.exports = {
   fetch: function (cb){
+      console.log("We are in fetch.")
       scrape (function (data){
           var articles = data;
-          for (var i = 0; i < article.length; i++){
+          console.log("About to save " + articles.length)
+          console.log(articles)
+          for (var i = 0; i < articles.length; i++){
               articles[i].date = makeDate();
               articles[i].saved = false;
 
           }
-          article.collection.insertMany(article, {ordered:false}, function (err, docs){
+          article.collection.insertMany(articles, {ordered:false}, function (err, docs){
+              console.log("After save")
+              console.log(err)
             cb(err, docs);
           });
       });
